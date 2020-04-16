@@ -3,8 +3,6 @@ import Counter from  './Counter';
 import Info from './Info';
 
 
-import logo from './logo.svg';
-import './App.css';
 
 const App = () => {
   // return <Counter />;
