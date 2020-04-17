@@ -9,8 +9,8 @@ import ContextSample from './ContextSample';
 
 const App = () => {
   // const [visible, setVisible] = useState(false);
-  // return <Counter />;
-  return <ContextSample />
+  return <Counter />;
+  // return <ContextSample />
   // (
   //   <div>
   //     <button
