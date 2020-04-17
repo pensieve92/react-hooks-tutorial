@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+    return {
+        ...state,
+        [action.name]:action.value
+    };
+}
 
 const Info = () => {
-
-    const [name, setName ] = useState('');
-    const [nickName, setNickName ] = useState('');
+    
+    // const [name, setName ] = useState('');
+    // const [nickName, setNickName ] = useState('');
     // ************************************************************************ //
     // useEffect :
     // 리액트 컴포넌트가 렌더링 될 때마다 
@@ -43,30 +51,39 @@ const Info = () => {
     // 오직 언마운트 될 때만 뒷정리 함수를 호출하고 싶으면,
     // useEffect함수의 두번째 파라미터에 비어있는 배열을 넣으면 됨
 
-    useEffect(()=> {
-        console.log('effect');
-        console.log(name);
-        return () => {
-            console.log('cleanup');
-            console.log(name);
-        }
-    }, [name])
+    // useEffect(()=> {
+    //     console.log('effect');
+    //     console.log(name);
+    //     return () => {
+    //         console.log('cleanup');
+    //         console.log(name);
+    //     }
+    // }, [name])
 
     // ************************************************************************ //
 
-    const onChangeName = e => {
-        setName(e.target.value);
-    }
+    // const onChangeName = e => {
+    //     setName(e.target.value);
+    // }
 
-    const onChangeNickName = e => {
-        setNickName(e.target.value);
+    // const onChangeNickName = e => {
+    //     setNickName(e.target.value);
+    // }
+
+    const [state, dispatch] = useReducer(reducer, {
+        name: '',
+        nickName: ''
+    })
+    const {name, nickName } = state;
+    const onChange = e => {
+        dispatch(e.target);
     }
 
     return (
         <div>
             <div>
-                <input value={name} onChange={onChangeName} />
-                <input value={nickName} onChange={onChangeNickName} />
+                <input name="name" value={name} onChange={onChange} />
+                <input name="nickName" value={nickName} onChange={onChange} />
             </div>
             <div>
                 <b>이름: </b> {name}
