@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 
 // useMemo : 숫자, 문자, 객체 재사용
 // useCallback : 함수 재사용
@@ -34,6 +34,10 @@ import React, { useState, useMemo, useCallback } from 'react';
 // useCallback은 결국 useMemo에서 함수를 반환하는 상황에서 더 편하게 사용 할 수 있는 Hook입니다.
 // 숫자, 문자열, 객체 처럼 일반 값을 재사용하기 위해서는 useMemo를, 함수를 재사용하기 위해서는 useCallback을 사용하세요
 
+// useRef
+// useRef Hook은 함수형 컴포넌트에서 ref를 쉽게 사용할 수 있게 해줍니다. 
+// Average 컴포넌트에서 등록 버튼을 눌렀을 때 포커스가 인풋쪽으로 넘어가도록 코드를 작성
+
 const getAverage = numbers => {
     console.log('평균값 계산중..');
     if(numbers.length === 0) return 0;
@@ -44,6 +48,7 @@ const getAverage = numbers => {
 const Average = () => {
     const [ list, setList ] = useState([]);
     const [ number, setNumber ] = useState('');
+    const inputEl = useRef(null); // 기본값 null 설정
 
     const onChange = useCallback(e => {
         setNumber(e.target.value);
@@ -53,6 +58,8 @@ const Average = () => {
         const nextList = list.concat(parseInt(number));
         setList(nextList);
         setNumber('');
+        inputEl.current.focus(); // useRef를 사용하여 ref를 설정하면, 
+                                 // useRef를 통해 만든 객체 안의 current 값이 실제 엘리먼트를 가르키게 됩니다.
     }, [number, list]);  // number 혹은 list가 바뀌었을 때만 함수 생성
     
     // list 배열의 내용이 바뀔 때에만 getAverage함수가 호출됩니다 (onInsert에서 setList가 실행됨)
@@ -60,7 +67,7 @@ const Average = () => {
 
     return (
         <div>
-            <input value={number} onChange={onChange} />
+            <input value={number} onChange={onChange} ref={inputEl} />
             <button onClick={onInsert}>등록</button>
             <ul>
                 {list.map((value, index)=> (
