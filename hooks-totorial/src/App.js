@@ -3,6 +3,7 @@ import Counter from  './Counter';
 import Info from './Info';
 import ContextSample from './ContextSample';
 import Average from './Average';
+import UsePromiseSample from './UsePromiseSample';
 
 
 
@@ -12,7 +13,8 @@ const App = () => {
   // const [visible, setVisible] = useState(false);
   // return <Counter />;
   // return <ContextSample />
-  return <Info />
+  // return <Info />
+  return <UsePromiseSample />
 
   // return <Average />
 
