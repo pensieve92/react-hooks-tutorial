@@ -12,9 +12,9 @@ const App = () => {
   // const [visible, setVisible] = useState(false);
   // return <Counter />;
   // return <ContextSample />
-  // return <Info />
+  return <Info />
 
-  return <Average />
+  // return <Average />
 
   // (
   //   <div>

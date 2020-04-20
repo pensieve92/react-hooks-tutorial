@@ -1,12 +1,14 @@
 // import React, { useState, useEffect } from 'react';
 import React, { useReducer } from 'react';
+import useInputs from './useInputs';
 
-function reducer(state, action) {
-    return {
-        ...state,
-        [action.name]:action.value
-    };
-}
+// 커스텀 Hooks (useInputs에 있음)
+// function reducer(state, action) {
+//     return {
+//         ...state,
+//         [action.name]:action.value
+//     };
+// }
 
 const Info = () => {
     
@@ -70,15 +72,22 @@ const Info = () => {
     //     setNickName(e.target.value);
     // }
 
-    const [state, dispatch] = useReducer(reducer, {
+
+    // 커스텀 Hooks 만들기
+    // const [state, dispatch] = useReducer(reducer, {
+    //     name: '',
+    //     nickName: ''
+    // })
+    // const onChange = e => {
+    //     dispatch(e.target);
+    // }
+
+    const [state, onChange] =  useInputs({
         name: '',
         nickName: ''
-    })
+    });
     const {name, nickName } = state;
-    const onChange = e => {
-        dispatch(e.target);
-    }
-
+    
     return (
         <div>
             <div>
